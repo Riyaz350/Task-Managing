@@ -9,6 +9,8 @@ import Home from './Layout/Home/Home.jsx';
 import LandingPage from './Layout/Home/LandingPage/LandingPage.jsx';
 import LogIn from './Authentication/LogIn/LogIn.jsx';
 import Register from './Authentication/Register/Register.jsx';
+import ForgotPass from './Authentication/ForgotPass.jsx';
+import Dashboard from './Layout/Dashboard/Dashboard.jsx';
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -28,7 +30,18 @@ const router = createBrowserRouter([
         path:'/register',
         element:<Register></Register>
       },
+      {
+        path:'/forgotPass',
+        element:<ForgotPass></ForgotPass>
+      },
     ]
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    
+      
+    
   },
 ]);
 

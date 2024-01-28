@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
@@ -34,7 +34,7 @@ const LogIn = () => {
 
     return (
         <div >
-            <div data-aos='fade-up' className="py-20 lg:p-20">
+            <div  className="py-20 lg:p-20">
                 <div className={"text-black light-home max-w-xl rounded-3xl mx-auto my-20 py-10 px-5 lg:p-20 border-2 border-black"}>
                     <div className="text-center ">
                     <h1 className="text-3xl mb-10 lg:text-5xl font-bold ">Sign in </h1>
@@ -56,7 +56,7 @@ const LogIn = () => {
                         </div>
 
                         <label className="label">
-                            <a href="#" className= "text-black label-text-alt text-base link link-hover">Forgot password?</a>
+                            <NavLink to='/forgotPass' className= "text-black label-text-alt text-base link link-hover">Forgot password?</NavLink>
                         </label>
                         </div>
                         <div className="form-control mt-4">

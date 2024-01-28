@@ -1,11 +1,13 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { createContext, useEffect, useState } from "react"
-import useAxiosPublic from "../../Hooks/useAxiosPublic"
+// import useAxiosPublic from "../../Hooks/useAxiosPublic"
 import auth from "../../../firebase.config"
+import { sendPasswordResetEmail } from "firebase/auth";
+
 
 export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
-    const axiosPublic = useAxiosPublic()
+    // const axiosPublic = useAxiosPublic()
     const [loading, setLoading] =useState(true)
     const [user, setUser] =useState(null)
     const [month, setMonth] =useState('january')
@@ -14,6 +16,10 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         
         return createUserWithEmailAndPassword(auth, email, password)
+    }
+    const passReset = ( email) =>{
+        setLoading(true)
+        return sendPasswordResetEmail(auth, email)
     }
 
     const signInUser = (email, password) =>{
@@ -37,31 +43,31 @@ const AuthProvider = ({children}) => {
             
             setUser(currentUser)
             setLoading(false)
-            if(currentUser){
+            // if(currentUser){
 
-                const userEmail = {email: currentUser.email}
-                // create token
-                axiosPublic.post('/jwt', userEmail )
-                .then(res =>{
-                    if(res.data.token){
-                        localStorage.setItem('access-token', res.data.token)
-                        setLoading(false);
+            //     const userEmail = {email: currentUser.email}
+            //     // create token
+            //     axiosPublic.post('/jwt', userEmail )
+            //     .then(res =>{
+            //         if(res.data.token){
+            //             localStorage.setItem('access-token', res.data.token)
+            //             setLoading(false);
 
-                    }
-                })
-            }
-            else{
+            //         }
+            //     })
+            // }
+            // else{
 
-                localStorage.removeItem('access-token')
-                setLoading(false);
-            }
+            //     localStorage.removeItem('access-token')
+            //     setLoading(false);
+            // }
         })
         return()=>{
           unSubscribe()  
         }
-    },[user?.email, axiosPublic])
+    },[user?.email])
 
-    const authInfo = { user,loading,month, setMonth, createUser, signInUser,signInPop, logOut }
+    const authInfo = { user,loading,month, setMonth, createUser, signInUser,signInPop, logOut, passReset }
 
 return(
 <AuthContext.Provider value={authInfo}>
