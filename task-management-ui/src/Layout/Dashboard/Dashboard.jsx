@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 
 const Dashboard = () => {
@@ -8,6 +8,7 @@ const Dashboard = () => {
     const navLinks = 
     <div>
       <NavLink className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to="/">Home</NavLink>
+      <NavLink  className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to='/dashboard/allTasks'>All Tasks</NavLink>
     </div>
     return (
         <div>
@@ -25,6 +26,9 @@ const Dashboard = () => {
                 
                 </ul>
             </div>
+            </div>
+            <div className="pt-10 md:pt-20">
+            <Outlet></Outlet>
             </div>
         </div>
     );

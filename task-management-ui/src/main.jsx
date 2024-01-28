@@ -11,6 +11,7 @@ import LogIn from './Authentication/LogIn/LogIn.jsx';
 import Register from './Authentication/Register/Register.jsx';
 import ForgotPass from './Authentication/ForgotPass.jsx';
 import Dashboard from './Layout/Dashboard/Dashboard.jsx';
+import AllTasks from './Layout/Dashboard/AllTasks/AllTasks.jsx';
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -37,11 +38,15 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <Dashboard></Dashboard>,
-    
+    children:[
+      {
+        path:'allTasks',
+        element:<AllTasks></AllTasks>
+      },
       
-    
+    ]
   },
 ]);
 
