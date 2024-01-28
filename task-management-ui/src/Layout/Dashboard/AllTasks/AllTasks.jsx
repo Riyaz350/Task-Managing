@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { collection,  addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../../firebase.config";
+import Swal from "sweetalert2";
 
 const AllTasks = () => {
 
@@ -41,7 +42,9 @@ const AllTasks = () => {
         const description = form.description.value
 
         addDoc(tasks, {date, title, description})
-        .then(res=> console.log(res))
+        .then(()=> {
+            Swal.fire({position: "top-end", icon: "success", title: "Task Added", showConfirmButton: false, timer: 1500});
+        })
         .catch(err=> console.log(err))
     }
     const handleUpdate=(e)=>{
@@ -53,7 +56,12 @@ const AllTasks = () => {
         const description = form.description.value
 
         const upTask = doc(db, 'tasks', ID)
-        updateDoc(upTask, {date, title, description})
+        updateDoc(upTask, {date, title, description, ID})
+        .then(()=>{
+            e.target.reset()
+            Swal.fire({position: "top-end", icon: "success", title: "Task Updated", showConfirmButton: false, timer: 1500});
+
+        })
     }
     return (
         <div>
@@ -106,7 +114,7 @@ const AllTasks = () => {
                                                 <div className=" md:gap-6 ">
                                                 <div className="lg:w-[500px] mx-auto  text-[#FFffff]">
                                                     <h1>Availability Date</h1>
-                                                        <DatePicker className="lg:text-3xl bg-[#000000] text-center text-xl" selected={startDate} onChange={(date)  => setStartDate(date)} />
+                                                        <DatePicker selected={startDate} className="lg:text-3xl bg-[#000000] text-center text-xl"  onChange={(date)  => setStartDate(date)} />
                                                         </div>
                                                 <div className="relative z-0 w-full mb-6 group">
                                                     <input defaultValue={data.data.title} type="text" name="title"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Name" required />
