@@ -1,10 +1,12 @@
 import { CiCirclePlus } from "react-icons/ci";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import { addDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
 
 const AddTask = (tasks) => {
+    const {user} = useContext(AuthContext)
     const [startDate, setStartDate] = useState(new Date());
     const btnClass = "btn w-fit mx-auto font-bold flex justify-end  bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
     const day = startDate.getDate()
@@ -18,10 +20,11 @@ const AddTask = (tasks) => {
         const date = day+'/'+ month +'/'+year
         const title = form.title.value
         const description = form.description.value
+        const owner = [user.email]
 
         // console.log(date, title, description)
 
-        addDoc(tasksCol, {date, title, description})
+        addDoc(tasksCol, {date, title, description, owner})
         .then(()=> {
             Swal.fire({position: "top-end", icon: "success", title: "Task Added", showConfirmButton: false, timer: 1500});
         })

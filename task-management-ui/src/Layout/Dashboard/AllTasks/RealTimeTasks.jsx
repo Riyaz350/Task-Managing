@@ -1,15 +1,17 @@
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { tasks } from "../../../Hooks/firestore.collections";
 import EditTask from "./EditTask";
 import Swal from "sweetalert2";
 import { MdDeleteForever } from "react-icons/md";
 import { db } from "../../../../firebase.config";
+import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
 
 const RealTimeTasks = () => {
+    const {user} = useContext(AuthContext)
     const [tasksCol, setTasksCol] = useState([])
-    console.log(tasksCol)
     const tasks = collection(db, 'tasks')
+    const filteredTask = tasksCol.filter(task => task.doc.owner.includes(user.email))
 
     useEffect(()=>{
        const unsubscribe = onSnapshot(tasks, snapshot =>{
@@ -34,7 +36,7 @@ const RealTimeTasks = () => {
     return (
         <div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-                {tasksCol.map((data, index)=>
+                {filteredTask.map((data, index)=>
                     <div key={index} className={`${window.innerWidth == 1024 ? 'w-52' : 'lg:w-96' }card bg-[#ef4444] shadow-2xl`}>
                     <div className="card-body">
                       <h2 className="card-title">{data.doc.title}</h2>
