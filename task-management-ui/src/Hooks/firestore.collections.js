@@ -1,4 +1,3 @@
-import { collection } from "firebase/firestore";
-import { db } from "../../../../firebase.config";
+// import { collection } from "firebase/firestore";
 
-export const tasks = collection(db, 'tasks')
+// export const tasks = collection(db, 'tasks')
