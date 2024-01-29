@@ -20,11 +20,12 @@ const AddTask = (tasks) => {
         const date = day+'/'+ month +'/'+year
         const title = form.title.value
         const description = form.description.value
-        const owner = [user.email]
+        const owner = user.email
+        const collabs = []
 
         // console.log(date, title, description)
 
-        addDoc(tasksCol, {date, title, description, owner})
+        addDoc(tasksCol, {date, title, description, owner, collabs})
         .then(()=> {
             Swal.fire({position: "top-end", icon: "success", title: "Task Added", showConfirmButton: false, timer: 1500});
         })
@@ -33,7 +34,7 @@ const AddTask = (tasks) => {
 
     return (
         <div>
-             <button className={`${btnClass} my-5 lg:my-10 `} onClick={()=>document.getElementById('my_modal_4').showModal()}><span className="text-xl">< CiCirclePlus /></span>Add Task</button>
+             <button className={`${btnClass}  `} onClick={()=>document.getElementById('my_modal_4').showModal()}><span className="text-xl">< CiCirclePlus /></span>Add Task</button>
             <dialog id="my_modal_4" className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
                     <div className="modal-action flex flex-col">

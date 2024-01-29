@@ -4,9 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
-
 const LogIn = () => {
-    const {user} = useContext(AuthContext)
     const {signInUser} =useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -22,6 +20,9 @@ const LogIn = () => {
                 Swal.fire({position: "top-end", icon: "success", title: "Welcome to Task Forge", showConfirmButton: false, timer: 1500});
                 e.target.reset()
                 navigate(location?.state? location.state :'/')
+
+                
+    
             
             })
         .catch((error)=>{

@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
+
 const LandingPage = () => {
     return (
         <div>
-            <h1>You have landed</h1>
+            
         </div>
     );
 };

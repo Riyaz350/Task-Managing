@@ -35,7 +35,9 @@ const handleEmailRegister = e=>{
         e.target.reset()
         Swal.fire({position: "top-end", icon: "success", title: "Please Sign In again", showConfirmButton: false, timer: 1500});
 
+           
         
+
         logOut()
         .then(result=>console.log(result))
         .catch(error => console.log(error.message))

@@ -7,7 +7,7 @@ const AllTasks = () => {
     const tasks = collection(db, 'tasks')
     
     return (
-        <div>
+        <div className="">
             <AddTask tasks={tasks}></AddTask>
 
             <RealTimeTasks></RealTimeTasks>

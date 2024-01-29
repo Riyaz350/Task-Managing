@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const EditTask = (data) => {
         const [startDate, setStartDate] = useState(new Date());
-        const btnClass = "btn w-fit mx-auto font-bold flex justify-end  bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
+        const btnClass = "btn lg:text-base text-xs w-fit mx-auto font-bold flex justify-end  bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
 
         const day = startDate.getDate()
         const month = startDate.getMonth() +1
