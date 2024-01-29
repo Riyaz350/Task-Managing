@@ -14,7 +14,10 @@ const Navbar = () => {
 
     const navLinks = < div className=" lg:flex items-center gap-6 space-y-1">
       <NavLink className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to="/">Home</NavLink>
+      {user &&
+      
       <NavLink className={({ isActive, isPending }) =>isPending ? "pending" : isActive ? active : inActive} to="/dashboard/allTasks">Dashboard</NavLink>
+      }
       </div>
 
       const handleLogOut = () =>{
@@ -58,7 +61,7 @@ const Navbar = () => {
                     <summary className="m-2 btn p-0 rounded-full bg-transparent border-2 border-[#ef4444] w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] hover:border-0 hover:bg-transparent" >{user.photoURL? <img className="w-14 rounded-full" src={user.photoURL}></img> :<div className="m-1 btn bg-[#000000] rounded-full hover:text-[#000000] hover:bg-white"><FaRegUser  /></div>} </summary>
                     <ul className="text-base text-white font-semibold dropdown-content z-[1] menu p-2 shadow bg-[#000000] rounded-box w-52">
                         <li className="btnLandLord"><Link>{user.displayName}</Link></li>
-                        <li className="btnLandLord"><Link to='/dashboard'>Dashboard</Link></li>
+                        <li className="btnLandLord"><Link to='/dashboard/allTasks'>Dashboard</Link></li>
                         <li className="btnLandLord"><button onClick={handleLogOut}>Log Out</button></li>
                     </ul>
                 </details>

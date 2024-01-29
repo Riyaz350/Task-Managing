@@ -20,12 +20,13 @@ const AddTask = (tasks) => {
         const date = day+'/'+ month +'/'+year
         const title = form.title.value
         const description = form.description.value
-        const owner = user.email
+        const owner = user?.email
+        const ownerName = user?.displayName
         const collabs = []
 
-        // console.log(date, title, description)
+        console.log(ownerName)
 
-        addDoc(tasksCol, {date, title, description, owner, collabs})
+        addDoc(tasksCol, {date, title, description, owner, ownerName, collabs})
         .then(()=> {
             Swal.fire({position: "top-end", icon: "success", title: "Task Added", showConfirmButton: false, timer: 1500});
         })

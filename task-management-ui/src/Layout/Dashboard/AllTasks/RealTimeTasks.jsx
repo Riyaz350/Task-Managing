@@ -1,12 +1,10 @@
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
-// import { tasks } from "../../../Hooks/firestore.collections";
+import {  deleteDoc, doc } from "firebase/firestore";
+import { useContext } from "react";
 import EditTask from "./EditTask";
 import Swal from "sweetalert2";
 import { MdDeleteForever } from "react-icons/md";
 import { db } from "../../../../firebase.config";
 import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
-import CollabTask from "./CollabTask";
 
 const RealTimeTasks = () => {
     const {user,  tasksCol} = useContext(AuthContext)

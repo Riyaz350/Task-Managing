@@ -19,6 +19,7 @@ const CollaboratedTasks = () => {
                 {filtered.map((data, index)=>
                     <div key={index} className={`${window.innerWidth == 1024 ? 'w-52' : 'lg:w-96' }card border-2 border-[#ef4444] hover:shadow-[#ef4444] shadow-lg duration-200`}>
                     <div className="card-body">
+                      <h2 className="card-title text-xs md:text-xl lg:text-2xl">{data.doc.ownerName}</h2>
                       <h2 className="card-title text-xs md:text-xl lg:text-2xl">{data.doc.title}</h2>
                       <p>Due date: {data.doc.date}</p>
                       <p>{data.doc.description}</p>

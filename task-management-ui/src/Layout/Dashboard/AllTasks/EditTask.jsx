@@ -25,6 +25,8 @@ const EditTask = (data) => {
         const owner = data.data.doc.owner
         const description = data.data.doc.description
         const title = data.data.doc.title
+        const ownerName = data.data.doc
+        console.log(ownerName)
 
         useEffect(()=>{
             setDoc(tasksss, {date, owner, description, title, collabs:newColl})

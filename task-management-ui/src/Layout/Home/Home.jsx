@@ -4,6 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 import { useContext } from "react";
 import { AuthContext } from "../../Authentication/AuthProvider/AuthProvider";
+import Footer from "../../Shared/Footer";
 
 const Home = () => {
     
@@ -11,6 +12,7 @@ const Home = () => {
         <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
+            <Footer></Footer>
         </div>
     );
 };
