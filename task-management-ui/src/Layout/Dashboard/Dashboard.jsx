@@ -6,9 +6,10 @@ const Dashboard = () => {
     const inActive = 'btn shadow-none bg-[#000000] border-2 border-white text-white font-bold  w-full hover:border-[#000000] border-transparent rounded-lg hover:bg-[#000000] hover:border-[#ffffff] hover:text-[#ffffff]'
 
     const navLinks = 
-    <div>
+    <div className="space-y-4">
       <NavLink className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to="/">Home</NavLink>
-      <NavLink  className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to='/dashboard/allTasks'>All Tasks</NavLink>
+      <NavLink  className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to='/dashboard/allTasks'>My Tasks</NavLink>
+      <NavLink  className={({ isActive, isPending,  }) =>isPending ? "pending" : isActive ? active : inActive} to='/dashboard/collTasks'>Collaborated Tasks</NavLink>
     </div>
     return (
         <div>

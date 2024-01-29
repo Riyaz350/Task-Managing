@@ -1,18 +1,35 @@
-import { doc, updateDoc } from "firebase/firestore";
-import { useState } from "react";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
 import { db } from "../../../../firebase.config";
 import Swal from "sweetalert2";
 import { FaPencilAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
 
 const EditTask = (data) => {
         const [startDate, setStartDate] = useState(new Date());
+        const [newColl, setNewColl] = useState(data.data.doc.collabs)
         const btnClass = "btn lg:text-base text-xs w-fit mx-auto font-bold flex justify-end  bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
+        const {user, usersCol} = useContext(AuthContext)
+        const colls = usersCol.filter(userr=> userr.doc.userEmail !== user?.email)
+        const ID = data.data.id
+        const tasksss = doc(db, 'tasks', ID)
+
 
         const day = startDate.getDate()
         const month = startDate.getMonth() +1
         const year = startDate.getFullYear()
+
+        const date = data.data.doc.date
+        const owner = data.data.doc.owner
+        const description = data.data.doc.description
+        const title = data.data.doc.title
+
+        useEffect(()=>{
+            setDoc(tasksss, {date, owner, description, title, collabs:newColl})
+
+        },[newColl])
 
         const handleUpdate=(e)=>{
         e.preventDefault()
@@ -22,6 +39,9 @@ const EditTask = (data) => {
         const ID = data.data.id
         const description = form.description.value
 
+
+       
+
         const upTask = doc(db, 'tasks', ID)
         updateDoc(upTask, {date, title, description})
         .then(()=>{
@@ -30,10 +50,13 @@ const EditTask = (data) => {
         })
         }
 
-        
-
+        const collabTask=(mail)=>{
+            setNewColl(newColl => [...newColl, mail]);
+        }
+        console.log(newColl)
     return (
         <div>
+            <div>
             <button  onClick={()=>document.getElementById(data.data.id).showModal()} className={btnClass} ><span className="text-xl"><FaPencilAlt /></span>Edit</button>
                         <dialog id={data.data.id} className="modal">
                             <div className="modal-box w-11/12 max-w-5xl">
@@ -61,7 +84,22 @@ const EditTask = (data) => {
                                 </form>
                                 </div>
                             </div>
+                            <div className="space-y-2 bg-white p-10">
+                                <h1 className="text-center text-xl font-medium ">Click to select collaborator</h1>
+                                {colls.map(user =>(
+                                    
+                                <button key={user.id} onClick={()=>collabTask(user.doc.userEmail)} className={`${btnClass }  w-full flex justify-between`}>
+                                    <img className="w-[40px] bg-white rounded-lg" src={user.doc.userPhoto} alt="" />
+                                    <h1 >{user.doc.userName}</h1>
+                                    <h1>{user.doc.userEmail}</h1>
+                                    </button>
+                                ))
+
+                                }
+                        </div>
                         </dialog>
+        </div>
+       
         </div>
     );
 };

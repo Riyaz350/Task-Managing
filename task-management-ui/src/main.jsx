@@ -12,6 +12,7 @@ import Register from './Authentication/Register/Register.jsx';
 import ForgotPass from './Authentication/ForgotPass.jsx';
 import Dashboard from './Layout/Dashboard/Dashboard.jsx';
 import AllTasks from './Layout/Dashboard/AllTasks/AllTasks.jsx';
+import CollaboratedTasks from './Layout/Dashboard/CollaboratedTasks/CollaboratedTasks.jsx';
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path:'allTasks',
         element:<AllTasks></AllTasks>
+      },
+      {
+        path:'collTasks',
+        element:<CollaboratedTasks></CollaboratedTasks>
       },
       
     ]
