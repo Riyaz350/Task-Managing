@@ -6,12 +6,14 @@ import Swal from "sweetalert2";
 import { MdDeleteForever } from "react-icons/md";
 import { db } from "../../../../firebase.config";
 import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
+import CollabTask from "./CollabTask";
 
 const RealTimeTasks = () => {
-    const {user} = useContext(AuthContext)
+    const {user, usersCol} = useContext(AuthContext)
     const [tasksCol, setTasksCol] = useState([])
     const tasks = collection(db, 'tasks')
     const filteredTask = tasksCol.filter(task => task.doc.owner.includes(user.email))
+    const btnClass = "btn w-fit mx-auto font-bold flex justify-end lg:text-base text-xs bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
 
     useEffect(()=>{
        const unsubscribe = onSnapshot(tasks, snapshot =>{
@@ -45,7 +47,7 @@ const RealTimeTasks = () => {
               });
     }
 
-    const btnClass = "btn w-fit mx-auto font-bold flex justify-end lg:text-base text-xs bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
+    
 
     return (
         <div>
@@ -62,7 +64,7 @@ const RealTimeTasks = () => {
                         <EditTask data={data}></EditTask>
 
                         <button onClick={()=>deleteTask(data.id)} className={`${btnClass } margin-0 border-0 text-red-500 border-red-500 hover:bg-red-500 hover:border-red-500`}><span className="text-xl"><MdDeleteForever /></span>Delete</button>
-                        <button onClick={()=>deleteTask(data.id)} className={`${btnClass } margin-0 border-0 text-blue-500 border-blue-500 hover:bg-blue-500 hover:border-blue-500`}><span className="text-xl"></span>Collaborate</button>
+                        <CollabTask></CollabTask>
                       </div>
                     </div>
                   </div>
