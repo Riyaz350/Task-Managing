@@ -16,7 +16,9 @@ const AuthProvider = ({children}) => {
     const [month, setMonth] =useState('january')
     const [usersCol, setUsersCol] = useState([])
     const [tasksCol, setTasksCol] = useState([])
+    const [commentsCol, setCommentsCol] = useState([])
     const tasks = collection(db, 'tasks')
+    const comments = collection(db, 'comments')
 
     
     const createUser = ( email, password) =>{
@@ -32,6 +34,14 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribe = onSnapshot(tasks, snapshot =>{
              setTasksCol(snapshot.docs.map(doc=>({id:doc.id, doc:doc.data()})))
+         })
+         return()=>{
+             unsubscribe()
+         }
+     },[])
+    useEffect(()=>{
+        const unsubscribe = onSnapshot(comments, snapshot =>{
+             setCommentsCol(snapshot.docs.map(doc=>({id:doc.id, doc:doc.data()})))
          })
          return()=>{
              unsubscribe()
@@ -92,7 +102,7 @@ const AuthProvider = ({children}) => {
 
     
 
-    const authInfo = { user,loading,month, setMonth, createUser, signInUser,signInPop, logOut, passReset, usersCol, tasksCol }
+    const authInfo = { user,loading,month, setMonth, createUser, signInUser,signInPop, logOut, passReset, usersCol, tasksCol, commentsCol }
 
 return(
 <AuthContext.Provider value={authInfo}>

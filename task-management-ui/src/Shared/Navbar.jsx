@@ -58,7 +58,7 @@ const Navbar = () => {
                 <Link to='/logIn' className="btn bg-[#000000] hover:bg-white hover:text-[#000000] text-white font-bold">Log In</Link>:
                 <>
                 <details className="dropdown dropdown-bottom dropdown-end">
-                    <summary className="m-2 btn p-0 rounded-full bg-transparent border-2 border-[#ef4444] w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] hover:border-0 hover:bg-transparent" >{user.photoURL? <img className="w-14 rounded-full" src={user.photoURL}></img> :<div className="m-1 btn bg-[#000000] rounded-full hover:text-[#000000] hover:bg-white"><FaRegUser  /></div>} </summary>
+                    <summary className="m-2 btn p-0 rounded-full bg-transparent border-2 border-[#ef444400] hover:border-[#ef4444] w-[50px] h-[50px] lg:w-[60px] lg:h-[60px]  hover:bg-transparent" >{user.photoURL? <img className="w-14 rounded-full" src={user.photoURL}></img> :<div className="m-1 btn bg-[#ffffff] rounded-full hover:text-[#000000] hover:bg-white"><FaRegUser  /></div>} </summary>
                     <ul className="text-base text-white font-semibold dropdown-content z-[1] menu p-2 shadow bg-[#000000] rounded-box w-52">
                         <li className="btnLandLord"><Link>{user.displayName}</Link></li>
                         <li className="btnLandLord"><Link to='/dashboard/allTasks'>Dashboard</Link></li>

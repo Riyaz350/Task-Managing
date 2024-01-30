@@ -3,6 +3,8 @@ import { db } from "../../../../firebase.config";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../Authentication/AuthProvider/AuthProvider";
 import EditTask from "../AllTasks/EditTask";
+import ShowTask from "../AllTasks/ShowTask";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -10,6 +12,7 @@ const CollaboratedTasks = () => {
     const {user,tasksCol} = useContext(AuthContext)
     const filtered = tasksCol.filter(task=> task.doc.collabs.includes(user.email))
     console.log(filtered)
+    const btnClass = "btn lg:text-base text-xs w-fit mx-5 lg:mx-10 font-bold flex justify-end  bg-white border-2 border-black hover:bg-black hover:text-white hover:border-black"
 
     const tasks = collection(db, 'tasks')
     console.log(tasks)
@@ -25,7 +28,7 @@ const CollaboratedTasks = () => {
                       <p>{data.doc.description}</p>
                       <div className="card-actions justify-center">
 
-
+                      <NavLink to={`/dashboard/showTask/${data.id}`} data={data} className={btnClass} ><span className="text-xl"></span>Details</NavLink>
                         <EditTask data={data}></EditTask>
 
                         {/* <button onClick={()=>deleteTask(data.id)} className={`${btnClass } margin-0 border-0 text-red-500 border-red-500 hover:bg-red-500 hover:border-red-500`}><span className="text-xl"><MdDeleteForever /></span>Delete</button> */}

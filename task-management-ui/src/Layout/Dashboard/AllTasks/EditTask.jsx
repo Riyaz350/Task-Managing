@@ -48,12 +48,16 @@ const EditTask = (data) => {
         updateDoc(upTask, {date, title, description})
         .then(()=>{
             Swal.fire({position: "top-end", icon: "success", title: "Task Updated", showConfirmButton: false, timer: 1500});
-
+            
         })
-        }
-
-        const collabTask=(mail)=>{
-            setNewColl(newColl => [...newColl, mail]);
+    }
+    
+    const collabTask=(mail, name)=>{
+        setNewColl(newColl => [...newColl, mail])
+        
+                Swal.fire({position: "top-end", icon: "success", title: `Task collaboration with ${name} successful `, showConfirmButton: false, timer: 1500});
+                
+        
         }
         console.log(newColl)
     return (
@@ -90,7 +94,7 @@ const EditTask = (data) => {
                                 <h1 className="text-center text-xl font-medium ">Click to select collaborator</h1>
                                 {colls.map(user =>(
                                     
-                                <button key={user.id} onClick={()=>collabTask(user.doc.userEmail)} className={`${btnClass }  w-full flex justify-between`}>
+                                <button key={user.id} onClick={()=>collabTask(user.doc.userEmail, user.doc.userName)} className={`${btnClass }  w-full flex justify-between`}>
                                     <img className="w-[40px] bg-white rounded-lg" src={user.doc.userPhoto} alt="" />
                                     <h1 >{user.doc.userName}</h1>
                                     <h1>{user.doc.userEmail}</h1>
